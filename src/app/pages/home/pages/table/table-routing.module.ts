@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ErrorComponent } from './error/error.component';
 
+import { TableComponent } from './table.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ErrorComponent
+    component: TableComponent
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class StaticRoutingModule { }
+export class TableRoutingModule { }

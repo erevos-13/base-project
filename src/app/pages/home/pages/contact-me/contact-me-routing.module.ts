@@ -1,17 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ErrorComponent } from './error/error.component';
 
+import { ContactMeComponent } from './contact-me.component';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: ErrorComponent
-  }
-];
+const routes: Routes = [{ path: '', component: ContactMeComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class StaticRoutingModule { }
+export class ContactMeRoutingModule { }
