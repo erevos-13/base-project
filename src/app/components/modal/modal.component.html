@@ -1,0 +1,64 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Post</h4>
+  <button
+    type="button"
+    class="close"
+    aria-describedby="modal-title"
+    (click)="modal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<ng-container [ngSwitch]="state">
+  <div class="modal-body" *ngSwitchCase="STATE.delete">
+    <p>
+      <strong
+        >Are you sure you want to delete
+        <span class="text-primary">{{ data.title }}</span> post?</strong
+      >
+    </p>
+  </div>
+  <div class="modal-body" *ngSwitchDefault>
+    <h4>{{ data.title }}</h4>
+    <p>{{ data.body }}</p>
+  </div>
+  <div class="modal-body"  *ngSwitchCase="STATE.edit">
+    <form [formGroup]="formEdit" class="p-1">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Title</label
+        >
+        <input
+          type="title"
+          formControlName="title"
+          class="form-control"
+          id="exampleFormControlInput1"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label"
+          >Body</label
+        >
+        <textarea
+          formControlName="body"
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          rows="3"
+        ></textarea>
+      </div>
+    </form>
+  </div>
+</ng-container>
+
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-secondary"
+    *ngIf="state !== STATE.info"
+    (click)="modal.dismiss('cancel click')"
+  >
+    Cancel
+  </button>
+  <button type="button" class="btn btn-dark" *ngIf="state === STATE.edit" (click)="onSubmit()">Edit</button>
+  <button type="button" [ngClass]="{'btn-danger': state === STATE.delete}"  class="btn btn-info" *ngIf="state === STATE.delete || state === STATE.info " (click)="onClose()">Ok</button>
+</div>

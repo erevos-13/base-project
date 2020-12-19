@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppState } from '@app/store';
+import { authStart } from '@app/store/user';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-login',
@@ -8,10 +11,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  protected formLogin: FormGroup;
+  formLogin: FormGroup;
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private store: Store<AppState>
   ) {
 
   }
@@ -29,7 +33,8 @@ export class LoginComponent implements OnInit {
     if(this.formLogin.invalid) {
       return;
     }
-    this.router.navigate(['home','table']).catch((err) => console.warn(err))
+    this.store.dispatch(authStart({email: this.formLogin.get('email').value , password: this.formLogin.get('password').value  }))
+    // this.router.navigate(['home','table']).catch((err) => console.warn(err));
 
   }
 

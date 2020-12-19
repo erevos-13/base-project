@@ -9,3 +9,7 @@ export const getPosts = createSelector(
   getPostState,
   (state) => state.entity
 )
+export const getLoadingPosts = createSelector(
+  getPostState,
+  (state) => state.loading
+)

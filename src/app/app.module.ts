@@ -13,23 +13,29 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer, effects } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './components/modal/modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     ApiModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({
       name: 'Portfolio'
     }),
+    NgbModule,
   ],
   providers: [PostService, {
     provide: HTTP_INTERCEPTORS,

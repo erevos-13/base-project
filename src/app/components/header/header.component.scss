@@ -1,3 +1,13 @@
 .header-container{
-  background-color: 	#787878;
+  background-image: linear-gradient(to bottom, #051937, #0c1f45, #172454, #252862, #342c6f);
+  h3, p{
+    color: white;
+  }
+  a.nav-link{
+    color: white;
+    .active{
+      color: white;
+    }
+  }
+
 }

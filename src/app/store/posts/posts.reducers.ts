@@ -18,9 +18,13 @@ const initialState: PostState = {
 
 const PostReducer = createReducer(
   initialState,
-  on(postAction.postStart, state => ({ ...state })),
-  on(postAction.postSuccess, (state, props) => ({ ...state, entity: props.posts })),
-  on(postAction.postFail, (state, props) => ({ ...state, error: props.error })),
+  on(postAction.postStart, state => ({ ...state, loading: true, entity: [] })),
+  on(postAction.postAddStart, state => ({ ...state, loading: true, entity: [] })),
+  on(postAction.postEditStart, state => ({ ...state, loading: true,  entity: [] })),
+  on(postAction.postRemoveStart, state => ({ ...state, loading: true,  entity: [] })),
+  on(postAction.postSuccess, (state, props) => ({ ...state, entity: props.posts, loading: false })),
+
+  on(postAction.postFail, (state, props) => ({ ...state, error: props.error, loading: false })),
 
 );
 

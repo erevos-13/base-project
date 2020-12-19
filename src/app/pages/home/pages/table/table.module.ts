@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { TableRoutingModule } from './table-routing.module';
 import { TableComponent } from './table.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [TableComponent],
   imports: [
     CommonModule,
-    TableRoutingModule
+    TableRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class TableModule { }
