@@ -7,6 +7,7 @@ import { of } from "rxjs";
 import { Router } from "@angular/router";
 import { uuid } from 'uuidv4';
 import * as fromAuthAction from './user.actions';
+import { Settings } from '@app/shared/settings';
 
 @Injectable()
 export class AuthEffect {
@@ -20,8 +21,12 @@ export class AuthEffect {
   authLogin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromAuthAction.authStart),
-      exhaustMap(() => {
-      return of(fromAuthAction.authSuccess({auth:'sdfsfsdfdsfdsfd'}))
+      exhaustMap((input) => {
+        if(input.rememberMe) {
+          localStorage.setItem(Settings.LocalStorages.rememberMe, 'true');
+        }
+
+        return of(fromAuthAction.authSuccess({ auth: 'sdfsfsdfdsfdsfd' }))
       }),
       catchError((err) => {
         console.error(err);
@@ -39,5 +44,15 @@ export class AuthEffect {
     ), { dispatch: false }
   )
 
+  logout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromAuthAction.authLogout),
+      tap((uid) => {
+        localStorage.clear();
+        this.router.navigate(['auth'], {replaceUrl: true});
+      })
+    ), { dispatch: false }
+  )
 
 }
+

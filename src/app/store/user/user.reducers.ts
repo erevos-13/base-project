@@ -22,6 +22,7 @@ const AuthReducer = createReducer(
   on(userAction.authStart, state => ({ ...state, loading: true, entity: null })),
   on(userAction.authSuccess, (state, props) => ({ ...state, loading: true, entity: props.auth })),
   on(userAction.authFail, (state, props) => ({ ...state, error: props.error, loading: false })),
+  on(userAction.authLogout, (state) => ({ ...state, entity: null  })),
 
 );
 

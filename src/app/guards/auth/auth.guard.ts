@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import * as fromAuth from '@app/store/user';
 import { map, take, tap } from 'rxjs/operators';
+import { Settings } from '@app/shared/settings';
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +22,17 @@ export class AuthGuard implements CanActivate {
 
   private check(): Observable<boolean> {
     return this.store.pipe(select(fromAuth.getAuth)).pipe(
-        take(1),
-        tap(auth => {
-            if (!auth) {
-                this.router.navigate(['auth']);
-            }
-        }),
-        map(auth => !!auth)
+      take(1),
+      map(auth => {
+        const rememberMe_ = localStorage.getItem(Settings.LocalStorages.rememberMe)
+        if (!auth && !rememberMe_) {
+          this.router.navigate(['auth']);
+          return false;
+        }
+        return true;
+      })
     );
-}
+  }
 
   canActivate(
     next: ActivatedRouteSnapshot,

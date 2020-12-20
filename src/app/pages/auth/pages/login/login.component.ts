@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     if(this.formLogin.invalid) {
       return;
     }
-    this.store.dispatch(authStart({email: this.formLogin.get('email').value , password: this.formLogin.get('password').value  }))
+    this.store.dispatch(authStart({email: this.formLogin.get('email').value , password: this.formLogin.get('password').value, rememberMe : this.formLogin.get('checkbox').value  }))
     // this.router.navigate(['home','table']).catch((err) => console.warn(err));
 
   }
